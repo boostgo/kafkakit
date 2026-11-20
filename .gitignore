@@ -1,0 +1,18 @@
+# Test and coverage artifacts
+coverage.out
+coverage.html
+*.test
+*.prof
+
+# Binaries
+bin/
+dist/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Local environment
+.env

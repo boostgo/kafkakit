@@ -1,0 +1,47 @@
+version: "2"
+
+run:
+  tests: true
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - ineffassign
+    - unused
+    - errorlint
+    - gocritic
+    - misspell
+    - gosec
+    - unconvert
+  settings:
+    misspell:
+      locale: US
+    gosec:
+      excludes:
+        - G115 # integer overflow conversion: sarama types are int8/int16/int32 by design
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters:
+          - gosec
+          - errcheck
+      - path: ^examples/
+        linters:
+          - gosec
+      # Examples use log.Fatal for brevity.
+      - path: example_test\.go
+        linters:
+          - gocritic
+        text: exitAfterDefer
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
